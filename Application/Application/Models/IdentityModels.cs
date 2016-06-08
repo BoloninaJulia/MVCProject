@@ -29,5 +29,7 @@ namespace Application.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Application.DB.Company> Companies { get; set; }
     }
 }

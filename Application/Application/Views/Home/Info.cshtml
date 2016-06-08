@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Компании";
+}
+
+<h2>Данные о компаниях</h2>
+<table border="1" class="table-bordered">
+    <tr><th>Название компании</th><th>Пользователь</th><th>Статус</th>><th>&nbsp;</th><th>&nbsp;</th></tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.User</td>
+            <td>@item.Status</td>
+
+            <td>
+                @*<a href='@Url.Action("Change",new { id = item.ID })'>
+                        <img src="~/images/1461594147_txt2.png" alt="Изменение информации о книге" />
+                    </a>*@
+            </td>
+            <td>
+                @*<a href='@Url.Action("Delete", new {id = item.ID })'>
+                        <img src="~/images/1461192651_Cancel.png" alt="Удаление книги" />
+                    </a>*@
+            </td>
+        </tr>
+    }
+</table>
+<p></p>
+@*<a href='@Url.Action("Create")'>
+        <img src="~/images/1461594964_book_add.png" alt="Добавить книгу" />
+    </a>*@
