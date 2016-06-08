@@ -67,15 +67,12 @@ namespace Application.Controllers
 
             return View("Company", list);
         }
+       
         public ActionResult CreateCompany()
         {
             return View();
         }
-        /// <summary>
-        /// Создание книги
-        /// </summary>
-        /// <param name="collection">Набор параметров</param>
-        /// <returns></returns>
+       
         [HttpPost]
         public ActionResult CreateCompany(FormCollection collection)
         {
@@ -87,6 +84,28 @@ namespace Application.Controllers
             db.Company.Add(c);
             db.SaveChanges();
             return RedirectToAction("CreateCompany");
+        }
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(FormCollection collection)
+        {
+            DB.DBModel db = new DB.DBModel();
+            DB.User c = new DB.User()
+            {
+                Name = collection["Name"],
+                Login=collection["Login"],
+                Password=collection["Password"],
+                IDCompany= int.Parse(collection["IDCompany"]),
+                StatusContract =collection["StatusContract"],
+
+            };
+            db.User.Add(c);
+            db.SaveChanges();
+            return RedirectToAction("CreateUser");
         }
         public ActionResult DeleteCompany(string id)
         {
@@ -112,6 +131,28 @@ namespace Application.Controllers
             db.SaveChanges();
             return RedirectToAction("Company");
         }
+        public ActionResult DeleteInfo(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                // Молча вернуться в список
+                return RedirectToAction("Info");
+            }
+            DB.DBModel db = new DB.DBModel();
+            DB.User c = (from item in db.User where item.Name == id select item).FirstOrDefault();
+            return View(c);
+           
+        }
+        [HttpPost]
+        public ActionResult DeleteInfo(string id, FormCollection collection)
+        {
+            DB.DBModel db = new DB.DBModel();
+            var quary  = (from item in db.User where item.Name == id select item);
+           
+            db.User.RemoveRange(quary);
+            db.SaveChanges();
+            return RedirectToAction("Info");
+        }
         public ActionResult ChangeCompany(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -133,6 +174,31 @@ namespace Application.Controllers
             c.Name = collection["Name"];
             db.SaveChanges();
             return RedirectToAction("Company");
+        }
+        public ActionResult ChangeInfo(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                // Молча вернуться в список
+                return RedirectToAction("Info");
+            }
+            DB.DBModel db = new DB.DBModel();
+            DB.User c = (from item in db.User where item.Name == id select item).FirstOrDefault();
+            return View(c);
+        }
+        [HttpPost]
+        public ActionResult ChangeInfo(FormCollection collection)
+        {
+            string ID = collection["Name"];
+            DB.DBModel db = new DB.DBModel();
+            DB.User c = (from item in db.User where item.Name == ID select item).FirstOrDefault();
+            c.Name = collection["Name"];
+            c.Login = collection["Login"];
+            c.Password = collection["Password"];
+            c.IDCompany = int.Parse(collection["IDCompany"]);
+            c.StatusContract = collection["StatusContract"];
+            db.SaveChanges();
+            return RedirectToAction("Info");
         }
     }
 }

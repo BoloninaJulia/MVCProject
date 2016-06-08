@@ -5,12 +5,13 @@
 
 <h2>Существующиe компаний</h2>
 <table border="1" class="table-bordered">
-    <tr><th>Название компании</th><th>&nbsp;</th><th>&nbsp;</th></tr>
+    <tr><th>ID</th><th>Название компании</th><th>&nbsp;</th><th>&nbsp;</th></tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.Name</td>
+            <td>@item.ID</td>
 
             <td>
                 <a href='@Url.Action("ChangeCompany",new { id = item.ID })'>

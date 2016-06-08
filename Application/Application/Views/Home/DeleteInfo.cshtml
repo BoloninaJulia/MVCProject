@@ -1,0 +1,67 @@
+﻿@model Application.DB.User
+
+@{
+    ViewBag.Title = "Удаление пользователя";
+}
+
+
+
+<h3>Вы уверены, что хотите удалить этого пользователя?</h3>
+<div>
+    <h4>Пользователь</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusContract)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusContract)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+
+            <a href='@Url.Action("Info")'>
+                <img src="~/images/1461595450_go-back.png" alt="Вернуться к списку" />
+            </a>|
+            <input type="submit" value="Удалить" class="btn btn-default" />
+        </div>
+    }
+</div>

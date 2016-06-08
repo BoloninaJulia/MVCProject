@@ -21,8 +21,9 @@ namespace Application.DB
         public string Login { get; set; }
         [StringLength(16)]
         [Required()]
-        [DisplayName("Пароль")]
+        [DisplayName("Пароль:")]
         public string Password{ get; set; }
+        [DisplayName("ID Компании:")]
         public int IDCompany { get; set; }
         [StringLength(20)]
         [Required()]

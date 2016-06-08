@@ -15,19 +15,19 @@
             <td>@item.Status</td>
 
             <td>
-                @*<a href='@Url.Action("Change",new { id = item.ID })'>
-                        <img src="~/images/1461594147_txt2.png" alt="Изменение информации о книге" />
-                    </a>*@
+                <a href='@Url.Action("ChangeInfo",new { id = item.User })'>
+                        <img src="~/images/1461594147_txt2.png" alt="Изменение информации о пользователе" />
+                    </a>
             </td>
             <td>
-                @*<a href='@Url.Action("Delete", new {id = item.ID })'>
-                        <img src="~/images/1461192651_Cancel.png" alt="Удаление книги" />
-                    </a>*@
+                <a href='@Url.Action("DeleteInfo", new {id = item.User })'>
+                        <img src="~/images/1461192651_Cancel.png" alt="Удаление пользователя" />
+                    </a>
             </td>
         </tr>
     }
 </table>
 <p></p>
-@*<a href='@Url.Action("Create")'>
-        <img src="~/images/1461594964_book_add.png" alt="Добавить книгу" />
-    </a>*@
+<a href='@Url.Action("CreateUser")'>
+        <img src="~/images/1461594964_book_add.png" alt="Добавить пользователя" />
+    </a>

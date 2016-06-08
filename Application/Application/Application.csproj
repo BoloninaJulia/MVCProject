@@ -282,6 +282,9 @@
     <Content Include="Views\Home\DeleteCompany.cshtml" />
     <Content Include="Views\Home\Company.cshtml" />
     <Content Include="Views\Home\ChangeCompany.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
+    <Content Include="Views\Home\ChangeInfo.cshtml" />
+    <Content Include="Views\Home\DeleteInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
