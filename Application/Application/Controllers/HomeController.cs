@@ -26,12 +26,7 @@ namespace Application.Controllers
 
             return View();
         }
-        public ActionResult V()
-        {
-
-
-            return View();
-        }
+       
         public ActionResult Info()
         {
             DB.DBModel db = new DB.DBModel();
@@ -51,6 +46,93 @@ namespace Application.Controllers
             }
 
             return View("Info", list);
+        }
+        public ActionResult Company()
+        {
+            DB.DBModel db = new DB.DBModel();
+            List<Models.Company> list = new List<Models.Company>();
+            var query = from i1 in db.Company
+                        orderby i1.Name
+                        select i1;
+            foreach (var a in query)
+            {
+                Models.Company item = new Models.Company()
+                {
+                    ID=a.ID,
+                    Name = a.Name
+
+                };
+                list.Add(item);
+            }
+
+            return View("Company", list);
+        }
+        public ActionResult CreateCompany()
+        {
+            return View();
+        }
+        /// <summary>
+        /// Создание книги
+        /// </summary>
+        /// <param name="collection">Набор параметров</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreateCompany(FormCollection collection)
+        {
+            DB.DBModel db = new DB.DBModel();
+            DB.Company c = new DB.Company()
+            {
+                Name = collection["Name"]
+            };
+            db.Company.Add(c);
+            db.SaveChanges();
+            return RedirectToAction("CreateCompany");
+        }
+        public ActionResult DeleteCompany(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                // Молча вернуться в список
+                return RedirectToAction("Company");
+            }
+
+            int ID = int.Parse(id);
+            DB.DBModel db = new DB.DBModel();
+            DB.Company c= (from item in db.Company where item.ID == ID select item).FirstOrDefault();
+            return View(c);
+        }
+        [HttpPost]
+        public ActionResult DeleteCompany(string id, FormCollection collection)
+        {
+            int ID = int.Parse(id);
+           
+            DB.DBModel db =new  DB.DBModel();
+            var query = from item in db.Company where item.ID ==ID  select item;
+            db.Company.RemoveRange(query);
+            db.SaveChanges();
+            return RedirectToAction("Company");
+        }
+        public ActionResult ChangeCompany(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                // Молча вернуться в список
+                return RedirectToAction("Company");
+            }
+            int ID = int.Parse(id);
+            DB.DBModel db = new DB.DBModel();
+            DB.Company c = (from item in db.Company where item.ID == ID select item).FirstOrDefault();
+            return View(c);
+        }
+        [HttpPost]
+        public ActionResult ChangeCompany(FormCollection collection)
+        {
+            int ID = int.Parse(collection["ID"]);
+            DB.DBModel db = new DB.DBModel();
+            DB.Company c = (from item in db.Company where item.ID == ID select item).FirstOrDefault();
+            c.Name = collection["Name"];
+            db.SaveChanges();
+            return RedirectToAction("Company");
         }
     }
 }
